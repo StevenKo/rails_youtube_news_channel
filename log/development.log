@@ -1,0 +1,128 @@
+Connecting to database specified by database.yml
+  [1m[36m (16.6ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (22.5ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (2.6ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateAreas (20130110033702)
+  [1m[35m (9.4ms)[0m  CREATE TABLE `areas` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20130110033702')[0m
+Migrating to CreateChannels (20130110034139)
+  [1m[35m (10.6ms)[0m  CREATE TABLE `channels` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(255), `is_singer` tinyint(1) DEFAULT 0, `link` varchar(255), `area_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (15.1ms)[0m  [1mCREATE INDEX `index_channels_on_area_id` ON `channels` (`area_id`)[0m
+  [1m[35m (0.9ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20130110034139')
+Migrating to CreateChannelRelationships (20130110050215)
+  [1m[36m (10.9ms)[0m  [1mCREATE TABLE `channel_relationships` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `direct_relative_id` int(11), `inverse_relative_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (16.9ms)[0m  CREATE INDEX `index_channel_relationships_on_direct_relative_id` ON `channel_relationships` (`direct_relative_id`)
+  [1m[36m (15.5ms)[0m  [1mCREATE INDEX `index_channel_relationships_on_inverse_relative_id` ON `channel_relationships` (`inverse_relative_id`)[0m
+  [1m[35m (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20130110050215')
+Migrating to AddChannelThumbnail (20130124125642)
+  [1m[36m (12.9ms)[0m  [1mALTER TABLE `channels` ADD `thumbnail` varchar(255)[0m
+  [1m[35m (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20130124125642')
+  [1m[36m (0.4ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (0.3ms)[0m  SELECT `schema_migrations`.`version` FROM `schema_migrations` 
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `areas` (`created_at`, `name`, `updated_at`) VALUES ('2013-01-24 13:08:37', '華語', '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `areas` (`created_at`, `name`, `updated_at`) VALUES ('2013-01-24 13:08:37', '日本', '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `areas` (`created_at`, `name`, `updated_at`) VALUES ('2013-01-24 13:08:37', '韓國', '2013-01-24 13:08:37')
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `areas` (`created_at`, `name`, `updated_at`) VALUES ('2013-01-24 13:08:37', '西洋', '2013-01-24 13:08:37')[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'himservice', 'HIM International Music 華研國際音樂', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 1, 'HIMSHERO', 'HIMSHERO(S.H.E)', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `channel_relationships` (`created_at`, `direct_relative_id`, `inverse_relative_id`, `updated_at`) VALUES ('2013-01-24 13:08:37', 2, 1, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `channel_relationships` (`created_at`, `direct_relative_id`, `inverse_relative_id`, `updated_at`) VALUES ('2013-01-24 13:08:37', 1, 2, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'warnertaiwan', '華納音樂 Warner Music Taiwan', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'JVRmuzic', '杰威爾音樂官方頻道 JVR Music Official Channel', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'enjoymusicrec', '喜歡音樂Enjoy Music', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'binmusictaipei', '相信音樂官方頻道', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'windmusictv', 'Wind Music 風潮音樂', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'universaltwn', '環球華語音樂官方影片日誌', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'avexcpop', 'avex taiwan 愛貝克思中文官方頻道', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'RockRecordsTaipei?feature=watch', '滾石唱片官方頻道 Rock Records Official Channel', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'ComixRockRecords', '滾石流行音樂愛情故事有聲漫畫書 Rock Records Comix', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'linfairrecords', '福茂唱片音樂', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'goldtyphoonmusic', 'GoldTyphoon金牌大風音樂', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'oceanbutterfliesus', '海蝶音樂官方頻道 Ocean Butterflies Official Channel', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'fowrmusic', '豐華唱片官方頻道', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'asiamuseentertainme', 'AsiaMuse 亞神音樂娛樂官方頻道', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'seedmusic2008', '種子音樂 SEEDMUSIC', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'wwrmusic', '小白兔唱片 White Wabbit Records', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'aagoodday', '風和日麗唱片行', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'watermusictaiwan', 'watermusic 華特國際音樂', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'wdfmusic', '美妙音樂官方YouTube', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'alphamediamusic', '上點音樂', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'melodymusic88', '美樂帝 音樂', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'fowrmusic', '豐華唱片官方頻道', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'HCMMUSIC', '豪記 唱片', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 0, 'ckrecords', 'CKRECORDS MUSIC', NULL, '2013-01-24 13:08:37')[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `channels` (`area_id`, `created_at`, `is_singer`, `link`, `name`, `thumbnail`, `updated_at`) VALUES (1, '2013-01-24 13:08:37', 1, 'hervoiceonefang', '萬芳 One-Fang 官方頻道', NULL, '2013-01-24 13:08:37')
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/api/v1/channels.json?area_id=1" for 127.0.0.1 at 2013-01-24 21:08:45 +0800
+Connecting to database specified by database.yml
+Processing by Api::V1::ChannelsController#index as JSON
+  Parameters: {"area_id"=>"1"}
+  [1m[36mChannel Load (8.2ms)[0m  [1mSELECT id,name,link,thumbnail FROM `channels` WHERE (area_id = ('1'))[0m
+Completed 200 OK in 46ms (Views: 18.9ms | ActiveRecord: 11.3ms)
